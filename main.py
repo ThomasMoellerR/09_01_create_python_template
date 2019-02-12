@@ -64,15 +64,15 @@ if args.output_folder != "": # Sicherheitsmechanismus, damit die eigene main.py 
 
         # In main.sh change args.output_folder to ""
 
-        """
+        
         f = open(os.path.join("", "main.sh"), "w")
 
         p = os.path.join(args.output_folder, "main.sh")
 
-        a = "#!/bin/bash" + nl
-        a += "tmux new-session -d -s template " + ss + "bash " + p + ss + nl
-        a += "exit 0" + nl
+        a = "sudo python3 " + ss + os.path.abspath(__file__) + ss + bs + nl
+        a += "--output_folder " + ss + ss + bs + nl
+    
 
         f.write(a)
         f.close()
-        """
+        
