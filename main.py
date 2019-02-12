@@ -1,6 +1,6 @@
 import argparse
 import os
-
+import subprocess
 
 nl = "\n" # newline
 ss = "\"" # string sign
@@ -63,16 +63,25 @@ if args.output_folder != "": # Sicherheitsmechanismus, damit die eigene main.py 
 
 
         # In main.sh change args.output_folder to ""
-
-        
         f = open(os.path.join("", "main.sh"), "w")
-
-        p = os.path.join(args.output_folder, "main.sh")
 
         a = "sudo python3 " + ss + os.path.abspath(__file__) + ss + bs + nl
         a += "--output_folder " + ss + ss + bs + nl
     
-
         f.write(a)
         f.close()
+
+
+        # Change permissions
+
+        command = "chmod -R 777 %s" % (os.path.join(args.output_folder, "main.sh"))
+        subprocess.call(command, shell=True)
         
+        command = "chmod -R 777 %s" % (os.path.join(args.output_folder, "main.py"))
+        subprocess.call(command, shell=True)
+
+        command = "chmod -R 777 %s" % (os.path.join(args.output_folder, "tmux.sh"))
+        subprocess.call(command, shell=True)
+
+        command = "chmod -R 777 %s" % (os.path.join(os.path.dirname(os.path.abspath(__file__)), "main.sh"))
+        subprocess.call(command, shell=True)
